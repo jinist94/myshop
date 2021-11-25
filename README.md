@@ -1,70 +1,40 @@
-# Getting Started with Create React App
+# react shoppingmall page
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+직접 만들어보자.
 
-## Available Scripts
+- 레이아웃 참고는 브랜디나 다른 웹 사이트 참고.
+- 카테고리 구성은 비교적 간단하게 작업하기.
+- 실제 데이터를 받아올 수 없으니 가짜 데이터 파일을 만들어서 사용.
+- 기본 페이지 기능 작업 이후에 디테일한 작업하기.
+- SASS 사용
 
-In the project directory, you can run:
+---
 
-### `npm start`
+### 11/23
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+간단하게 index, list, detail페이지 세팅, Route 설정
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+react-router-dom은 5버전 이상으로 설치 해야 route오류가 생기지 않음
 
-### `npm test`
+### 11.24
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+[datail page 작업]
 
-### `npm run build`
+- detail page tab 기능 구현
+- 기본 css세팅. 반응형으로 작업할 것을 고려하여 작업
+- 장바구니 기능 작업 시작!
+- link to로 페이지를 이동하니 scroll top으로 이동되지 않고 이전의 스크롤 위치 그대로 이동되는 문제 발견
+  ㄴ scrollToTop을 검색하여 hooks발견. 이 과정에서 withRouter과 Fragment의 존재를 알게 됨.
+- redux reducer으로 데이터를 복수로 관리하는데에 있어서 제대로 복습할 필요를 느낌
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- 장바구니 처리
+  1 장바구니 버튼 클릭시 해당 상품의 데이터를 cart state에 담고 cart페이지로 이동
+  2 클릭 하고 나서 장바구니에 있는 상품인지 조회 후에 없으면 담는 기능 구현
+  3 클릭시 quantity 란 추가 /중복 클릭 시 quantity +1
+  ㄴ quan input 관련된 것은 하나의 함수로 만들어서 진행
+  4 수량 선택하는 버튼을 만들고 수량이 올라갈 경우 quantity state가 증가
+  5 장바구니 버튼을 누를경우 quan data가 함께 전송되게 구현
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+> cart state에 담은 데이터 localstorage에 추가
+> localstorage에 있는 데이터를 기반으로 cart page에 구현
+> cart page에서 수량 증가 시 localstorage의 quan 도 수정
