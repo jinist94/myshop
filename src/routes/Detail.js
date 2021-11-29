@@ -1,7 +1,9 @@
-import { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useRef } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import "../css/detail.scss";
+import { useInput, useTab } from "../components/UseHooks";
+import { addCart } from "./store";
 
 const tabList = [
   {
@@ -13,7 +15,7 @@ const tabList = [
     content: <DetailReview />,
   },
   {
-    tab: "Q&amp;A",
+    tab: "Q&A",
     content: <DetailQna />,
   },
   {
@@ -21,37 +23,6 @@ const tabList = [
     content: <DetailOrder />,
   },
 ];
-
-const useTab = (initialTab, allTabs) => {
-  const [currentIndex, setCurrentIndex] = useState(initialTab);
-
-  return {
-    currentTab: allTabs[currentIndex],
-    changeTab: setCurrentIndex,
-    currentIndex,
-  };
-};
-const useInput = (initialValue) => {
-  const [value, setValue] = useState(initialValue);
-  const onChange = (event) => {
-    setValue(event.target.value);
-  };
-  const increase = () => setValue(value + 1);
-  const decrease = () => {
-    if (value > 0) setValue(value - 1);
-  };
-
-  return { value, onChange, increase, decrease };
-};
-
-const handleKeyDown = (event) => {
-  if (Number(event.key) || event.key == "Backspace") {
-    console.log(event.keyCode);
-  } else {
-    console.log("no");
-    event.preventDefault();
-  }
-};
 
 // Detaile start
 
@@ -61,21 +32,14 @@ function Detail(props) {
       state: { id, name, price, image },
     },
   } = props;
-  const cartData = useSelector((state) => state.cartReducer);
+
+  const test = { id, name, price, image };
   const quanInput = useRef();
   const dispatch = useDispatch();
   const history = useHistory();
 
   const { currentTab, changeTab, currentIndex } = useTab(0, tabList);
   const quan = useInput(1);
-
-  function clickCart(value) {
-    dispatch({
-      type: "ADD_CART",
-      payload: { id, name, price, image, quan: value },
-    });
-    history.push("/cart");
-  }
 
   return (
     <main>
@@ -93,7 +57,6 @@ function Detail(props) {
             <input
               ref={quanInput}
               type="tel"
-              onKeyDown={handleKeyDown}
               value={quan.value}
               onChange={quan.onChange}
             />
@@ -104,7 +67,10 @@ function Detail(props) {
               <button className="buy-btn">구매하기</button>
               <button
                 className="cart-btn"
-                onClick={() => clickCart(quan.value)}
+                onClick={() => {
+                  dispatch(addCart(test, quan.value));
+                  history.push("/cart");
+                }}
               >
                 장바구니
               </button>
@@ -114,8 +80,9 @@ function Detail(props) {
         <ul className="detail-tab">
           {tabList.map((item, index) => (
             <li
-              className={currentIndex === index && "selected"}
+              className={currentIndex === index ? "selected" : null}
               onClick={() => changeTab(index)}
+              key={index}
             >
               {item.tab}
             </li>

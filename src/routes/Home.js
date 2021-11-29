@@ -45,7 +45,6 @@ function VisualBn() {
 
 function Home() {
   let productData = useSelector((state) => state.productReducer);
-  console.log(productData);
   const [visual, setVisual] = useState(0);
   return (
     <main>

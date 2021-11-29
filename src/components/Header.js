@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import { Link } from "react-router-dom";
 
@@ -14,7 +14,9 @@ function Header() {
           <ul>
             <li>login</li>
             <li>shop</li>
-            <li>cart {cartData.length}</li>
+            <li>
+              <Link to="/cart">cart {cartData.length} </Link>
+            </li>
           </ul>
         </div>
       </div>
