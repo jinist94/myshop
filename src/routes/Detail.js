@@ -27,6 +27,7 @@ const tabList = [
 // Detaile start
 
 function Detail(props) {
+  console.log(props, "나는 디테일");
   const {
     location: {
       state: { id, name, price, image },
@@ -42,57 +43,55 @@ function Detail(props) {
   const quan = useInput(1);
 
   return (
-    <main>
-      <div className="detail-wrap">
-        <div className="detail-top">
-          <div className="img-area">
-            <img src={image} />
-          </div>
-          <div className="info-area">
-            <h3 className="name">{name}</h3>
-            <p className="price">{price}</p>
-            <button className="plus-btn" onClick={quan.increase}>
-              +
-            </button>
-            <input
-              ref={quanInput}
-              type="tel"
-              value={quan.value}
-              onChange={quan.onChange}
-            />
-            <button className="minus-btn" onClick={quan.decrease}>
-              -
-            </button>
-            <div className="btn-box">
-              <button className="buy-btn">구매하기</button>
-              <button
-                className="cart-btn"
-                onClick={() => {
-                  dispatch(addCart(test, quan.value));
-                  history.push("/cart");
-                }}
-              >
-                장바구니
-              </button>
-            </div>
-          </div>
+    <div className="detail-wrap">
+      <div className="detail-top">
+        <div className="img-area">
+          <img src={image} />
         </div>
-        <ul className="detail-tab">
-          {tabList.map((item, index) => (
-            <li
-              className={currentIndex === index ? "selected" : null}
-              onClick={() => changeTab(index)}
-              key={index}
+        <div className="info-area">
+          <h3 className="name">{name}</h3>
+          <p className="price">{price}</p>
+          <button className="plus-btn" onClick={quan.increase}>
+            +
+          </button>
+          <input
+            ref={quanInput}
+            type="tel"
+            value={quan.value}
+            onChange={quan.onChange}
+          />
+          <button className="minus-btn" onClick={quan.decrease}>
+            -
+          </button>
+          <div className="btn-box">
+            <button className="buy-btn">구매하기</button>
+            <button
+              className="cart-btn"
+              onClick={() => {
+                dispatch(addCart(test, quan.value));
+                history.push("/cart");
+              }}
             >
-              {item.tab}
-            </li>
-          ))}
-        </ul>
-        <div className="detail-content">
-          <div>{currentTab.content}</div>
+              장바구니
+            </button>
+          </div>
         </div>
       </div>
-    </main>
+      <ul className="detail-tab">
+        {tabList.map((item, index) => (
+          <li
+            className={currentIndex === index ? "selected" : null}
+            onClick={() => changeTab(index)}
+            key={index}
+          >
+            {item.tab}
+          </li>
+        ))}
+      </ul>
+      <div className="detail-content">
+        <div>{currentTab.content}</div>
+      </div>
+    </div>
   );
 }
 

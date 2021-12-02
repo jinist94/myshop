@@ -1,0 +1,19 @@
+main.home {
+  max-width: 100%;
+}
+
+.main-inner {
+  max-width: 1350px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.recommend-area {
+  margin-top: 100px;
+  .title {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+}

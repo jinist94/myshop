@@ -13,48 +13,14 @@
   }
 }
 
-header {
-  padding-left: 50px;
-}
-
-* {
-  box-sizing: border-box;
-}
-.top-area {
-  margin: 35px 0;
+main {
+  max-width: 1350px;
+  width: 100%;
+  margin: 0 auto;
 }
 .inserted {
   position: absolute;
   right: 0;
-}
-
-.inserted ul {
-  display: flex;
-  align-items: center;
-}
-.inserted ul li {
-  margin-left: 20px;
-}
-.top-cate {
-  display: flex;
-}
-
-.top-cate li {
-  padding: 20px;
-}
-
-.recommend {
-  display: flex;
-}
-
-.recommend-box {
-  width: 33.3%;
-  box-sizing: border-box;
-  padding: 20px;
-}
-
-.recommend-box img {
-  width: 100%;
 }
 
 .visual-box {
